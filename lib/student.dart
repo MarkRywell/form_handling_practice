@@ -1,6 +1,6 @@
 class Student {
 
-  final String id;
+  final int id;
   final String name;
   final int age;
   final int year;

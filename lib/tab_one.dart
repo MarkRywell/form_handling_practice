@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_handling_practice/form_page.dart';
+import 'package:form_handling_practice/student.dart';
 
 class TabOne extends StatefulWidget {
   const TabOne({Key? key}) : super (key: key);
@@ -10,7 +11,14 @@ class TabOne extends StatefulWidget {
 
 class _TabOneState extends State<TabOne> {
 
-  List students = [];
+  List <Student> students = [
+
+  ];
+
+  @override
+  void dispose(){
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context){
@@ -19,7 +27,6 @@ class _TabOneState extends State<TabOne> {
         itemCount: students.length,
         itemBuilder: (context, index){
           final student = students[index];
-
           return Dismissible(
             key: Key(student.id.toString()),
             child: ListTile(
