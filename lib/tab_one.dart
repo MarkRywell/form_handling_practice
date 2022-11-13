@@ -12,7 +12,14 @@ class TabOne extends StatefulWidget {
 class _TabOneState extends State<TabOne> {
 
   List <Student> students = [
-
+    Student(
+      id: 2020020,
+      name: "Mark Gaje",
+      age: 21,
+      year: 3,
+      course: "BSIT",
+      section: "R1"
+    )
   ];
 
   @override
@@ -28,21 +35,23 @@ class _TabOneState extends State<TabOne> {
         itemBuilder: (context, index){
           final student = students[index];
           return Dismissible(
-            key: Key(student.id.toString()),
-            child: ListTile(
-              title: Text(student.name),
-            )
+              key: Key(student.id.toString()),
+              child: ListTile(
+                title: Text(student.name),
+              )
           );
         }
       ),
-      floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton(
         onPressed: () async {
           var newStudent = await Navigator.push(context,
             MaterialPageRoute(
               builder: (context) => FormPage()
             )
           );
-          students.add(newStudent);
+          setState(() {
+            students.add(newStudent);
+          });
         },
         child: Icon(Icons.add)
       )
