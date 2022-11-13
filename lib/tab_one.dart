@@ -60,7 +60,9 @@ class _TabOneState extends State<TabOne> {
               return null;
             }
             else{
-              students.add(newStudent);
+              setState((){
+                students.add(newStudent);
+              });
             }
           }
           );
