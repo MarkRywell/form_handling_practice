@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_handling_practice/details_page.dart';
 import 'package:form_handling_practice/form_page.dart';
 import 'package:form_handling_practice/student.dart';
 
@@ -38,20 +39,31 @@ class _TabOneState extends State<TabOne> {
               key: Key(student.id.toString()),
               child: ListTile(
                 title: Text(student.name),
+                onTap: () {
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DetailsPage(student: student))
+                  );
+                }
               )
           );
         }
       ),
         floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          var newStudent = await Navigator.push(context,
+          Student? newStudent = await Navigator.push(context,
             MaterialPageRoute(
               builder: (context) => FormPage()
             )
           );
           setState(() {
-            students.add(newStudent);
-          });
+            if(newStudent == null){
+              return null;
+            }
+            else{
+              students.add(newStudent);
+            }
+          }
+          );
         },
         child: Icon(Icons.add)
       )
