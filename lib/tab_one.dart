@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_handling_practice/form_page.dart';
 
 class TabOne extends StatefulWidget {
   const TabOne({Key? key}) : super (key: key);
@@ -14,9 +15,6 @@ class _TabOneState extends State<TabOne> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Students"),
-      ),
       body: ListView.builder(
         itemCount: students.length,
         itemBuilder: (context, index){
@@ -29,6 +27,17 @@ class _TabOneState extends State<TabOne> {
             )
           );
         }
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          var newStudent = await Navigator.push(context,
+            MaterialPageRoute(
+              builder: (context) => FormPage()
+            )
+          );
+          students.add(newStudent);
+        },
+        child: Icon(Icons.add)
       )
     );
   }

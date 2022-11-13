@@ -8,6 +8,7 @@ void main () => runApp(
       brightness: Brightness.dark,
       primaryColor: Colors.blueGrey
     ),
+    debugShowCheckedModeBanner: false,
     home: HomePage()
   )
 );
