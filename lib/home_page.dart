@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:form_handling_practice/form_page.dart';
+import 'package:form_handling_practice/student.dart';
 import 'package:form_handling_practice/tab_one.dart';
 import 'package:form_handling_practice/tab_two.dart';
 
@@ -19,6 +21,36 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     super.initState();
   }
 
+  List <Student> students = [
+    Student(
+        id: 2020020,
+        name: "Mark Gaje",
+        age: 21,
+        year: 3,
+        course: "BSIT",
+        section: "R1"
+    )
+  ];
+
+  void addStudent () async {
+    Student? newStudent = await Navigator.push(context,
+        MaterialPageRoute(
+            builder: (context) => FormPage()
+        )
+    );
+    setState(() {
+      if(newStudent == null){
+        return null;
+      }
+      else{
+        setState((){
+          students.add(newStudent);
+        });
+      }
+    }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +68,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       body: TabBarView(
         controller: tabController,
         children: [
-          TabOne(),
+          TabOne(function: addStudent, students: students),
           TabTwo()
         ],
       )

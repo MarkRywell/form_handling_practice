@@ -4,7 +4,11 @@ import 'package:form_handling_practice/form_page.dart';
 import 'package:form_handling_practice/student.dart';
 
 class TabOne extends StatefulWidget {
-  const TabOne({Key? key}) : super (key: key);
+
+  final function;
+  final List students;
+
+  const TabOne({required this.function, required this.students, Key? key}) : super (key: key);
 
   @override
   State<TabOne> createState() => _TabOneState();
@@ -12,16 +16,6 @@ class TabOne extends StatefulWidget {
 
 class _TabOneState extends State<TabOne> {
 
-  List <Student> students = [
-    Student(
-      id: 2020020,
-      name: "Mark Gaje",
-      age: 21,
-      year: 3,
-      course: "BSIT",
-      section: "R1"
-    )
-  ];
 
   @override
   void dispose(){
@@ -32,9 +26,9 @@ class _TabOneState extends State<TabOne> {
   Widget build(BuildContext context){
     return Scaffold(
       body: ListView.builder(
-        itemCount: students.length,
+        itemCount: widget.students.length,
         itemBuilder: (context, index){
-          final student = students[index];
+          final student = widget.students[index];
           return Dismissible(
               key: Key(student.id.toString()),
               child: ListTile(
@@ -49,25 +43,8 @@ class _TabOneState extends State<TabOne> {
         }
       ),
         floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Student? newStudent = await Navigator.push(context,
-            MaterialPageRoute(
-              builder: (context) => FormPage()
-            )
-          );
-          setState(() {
-            if(newStudent == null){
-              return null;
-            }
-            else{
-              setState((){
-                students.add(newStudent);
-              });
-            }
-          }
-          );
-        },
-        child: Icon(Icons.add)
+            onPressed: widget.function,
+            child: Icon(Icons.add)
       )
     );
   }
